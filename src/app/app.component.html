@@ -1,0 +1,17 @@
+<div class="todo-container">
+  @for (
+  todo of todoData;
+  track todo.id;
+  let f = $first;
+  let l = $last;
+  let odd=$odd;
+  let event =$even
+  ) {
+  <app-todo [todoData]="todo" [first]="f" [last]="l" [odd]="odd" [even]="event" (onClickIcon)="getTodoInfo($event)">
+  </app-todo>
+}@empty {
+  No hay datos
+}
+<router-outlet />
+</div>
+<button (click)="orderData()">Ordenar</button>
