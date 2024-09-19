@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
 
-  todoData = TODO_DATA;
+  todoData = TODO_DATA[0];
 
   constructor(){
    
@@ -33,7 +33,7 @@ export class AppComponent {
     return item.id;
   }
 
-  orderData(){
-    this.todoData.sort((a,b) => a.priority - b.priority);
-  }
+  // orderData(){
+  //   this.todoData.sort((a,b) => a.priority - b.priority);
+  // }
 }
