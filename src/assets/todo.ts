@@ -4,7 +4,7 @@ export const TODO_DATA = [
       "description": "Investigar y leer la documentación de una nueva tecnología o herramienta relevante para el proyecto.",
       "status": "Por hacer",
       "priority": 3,
-      "hidden": false,
+      "hidden":false,
       "id": 1,
       "deadLine": "2024-04-07T03:25:54.898Z",
       "color": {

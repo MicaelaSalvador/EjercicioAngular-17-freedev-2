@@ -1,19 +1,52 @@
-<div class="todo-container">
 
-  <app-todo [todoData]="todoData" (onClickIcon)="getTodoInfo($event)">
-    <div class="name">Micaela</div>
-    <div class="last-name">Salvador</div>
-    <div projected-content="todo"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean viverra neque dictum,
-      tristique est vel, fermentum nisl. Quisque iaculis, velit id imperdiet semper, velit arcu molestie elit, sit amet
-      venenatis lacus mi ut velit. Praesent gravida neque at feugiat cursus. Vivamus auctor feugiat tempor. Fusce non
-      lorem scelerisque felis rutrum tempor ac et leo. Donec tincidunt leo tellus, id ornare ex egestas non. Ut dapibus
-      felis sed ipsum efficitur tempor. Nunc eget tellus dignissim massa blandit tincidunt. Nulla facilisi. Quisque
-      faucibus eu nisl sit amet feugiat. Fusce vehicula dolor in commodo auctor. Pellentesque iaculis tortor non
-      hendrerit iaculis. Integer lacinia pretium sem, ut rutrum velit pharetra eu.
-    </div>
+<div [appHighlighted] = "false">Header</div>
+<br> <br>
+<button (click)="highlightedDirective.onToggle()">Resaltar</button>
+<br>
+<br>
+@if (todoData) {
+<div class="todo-container">
+  <app-todo 
+  #todoRef
+  [appHighlighted]="false"
+  (onToggleHighlighted)="onToggleHighlighted($event)"
+  [todoData]="todoData"
+  (onClickIcon)="getTodoInfo($event)"
+  >
+    <!-- <ng-template  class="templete-ref"  [ngIf]="!todoData.hidden"> -->
+    <section  class="demo" *appNgxUnless="todoData.hidden">
+      <div class="name">Micaela</div>
+      <div class="last-name">Salvador</div>
+      <div projected-content="todo">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean viverra
+        neque dictum, tristique est vel, fermentum nisl. Quisque iaculis, velit
+        id imperdiet semper, velit arcu molestie elit, sit amet venenatis lacus
+        mi ut velit. Praesent gravida neque at feugiat cursus. Vivamus auctor
+        feugiat tempor. Fusce non lorem scelerisque felis rutrum tempor ac et
+        leo. Donec tincidunt leo tellus, id ornare ex egestas non. Ut dapibus
+        felis sed ipsum efficitur tempor. Nunc eget tellus dignissim massa
+        blandit tincidunt. Nulla facilisi. Quisque faucibus eu nisl sit amet
+        feugiat. Fusce vehicula dolor in commodo auctor. Pellentesque iaculis
+        tortor non hendrerit iaculis. Integer lacinia pretium sem, ut rutrum
+        velit pharetra eu.
+      </div>
+    </section>
   </app-todo>
   <router-outlet />
 </div>
+} @else {
+<ng-container
+  *ngTemplateOutlet="
+    noTodo;
+    context: { $implicit: 'Micaela', lastName: 'Salvador' }
+  "
+></ng-container>
+}
 
+<ng-template #noTodo let-name let-lastName="lastName">
+  <div>No hay elementos</div>
+  <div>nombre : {{ name }}</div>
+  <div>Apellido : {{ lastName }}</div>
+</ng-template>
 
 <!-- <button (click)="orderData()">Ordenar</button> -->
