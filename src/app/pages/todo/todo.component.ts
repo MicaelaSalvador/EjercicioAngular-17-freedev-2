@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, LOCALE_ID, Output } from '@angular/core';
+// import { Component, EventEmitter, Input, LOCALE_ID, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, LOCALE_ID, Output, ViewEncapsulation } from '@angular/core';
 import { NTodo } from '../../models/todo.model';
 import { CommonModule , registerLocaleData} from '@angular/common';
 import es from'@angular/common/locales/es';
@@ -15,10 +16,19 @@ registerLocaleData(es);
   ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
+  encapsulation:ViewEncapsulation.ShadowDom
 })
+
 export class TodoComponent {
-  @Input({ required: true }) todoData!: NTodo.TodoData;
+
+  @Input({ required: true}) todoData!: NTodo.TodoData;
+
   @Output() onClickIcon = new EventEmitter<NTodo.TodoData>();
+
+  // @Input({ required: true }) todoData!: NTodo.TodoData;
+  // @Output() onClickIcon = new EventEmitter<NTodo.TodoData>();
+
+  
 
   get priority(): string {
     switch (this.todoData.priority) {

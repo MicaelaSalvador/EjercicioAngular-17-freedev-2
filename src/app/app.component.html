@@ -1,52 +1,33 @@
+<app-header></app-header>
+<button (click)="addTodo()">Agregar todo</button>
+<div class="todo-container">
+  <!-- @for (item of (todos |async)?.data; track $index) { -->
+  @for (item of todos.data; track $index) {
+  <app-todo 
+  [todoData]="item"
+  (onClickIcon)="deleteTodo($event)"
+  >
+  <!-- <textarea rows="10" [(ngModel)]="item.description" (blur)="updateTodo(item)"></textarea> -->
+  <textarea rows="10" [(ngModel)]="item.description" (blur)="updateTodo(item)"></textarea>
+  </app-todo>
+}
+</div>
 
-<div [appHighlighted] = "false">Header</div>
-<br> <br>
-<button (click)="highlightedDirective.onToggle()">Resaltar</button>
-<br>
-<br>
-@if (todoData) {
+
+<!-- <br> <br>
 <div class="todo-container">
   <app-todo 
-  #todoRef
-  [appHighlighted]="false"
-  (onToggleHighlighted)="onToggleHighlighted($event)"
-  [todoData]="todoData"
+  class="orange-color"
+  [todoData]="todos[0]"
   (onClickIcon)="getTodoInfo($event)"
   >
-    <!-- <ng-template  class="templete-ref"  [ngIf]="!todoData.hidden"> -->
-    <section  class="demo" *appNgxUnless="todoData.hidden">
-      <div class="name">Micaela</div>
-      <div class="last-name">Salvador</div>
-      <div projected-content="todo">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean viverra
-        neque dictum, tristique est vel, fermentum nisl. Quisque iaculis, velit
-        id imperdiet semper, velit arcu molestie elit, sit amet venenatis lacus
-        mi ut velit. Praesent gravida neque at feugiat cursus. Vivamus auctor
-        feugiat tempor. Fusce non lorem scelerisque felis rutrum tempor ac et
-        leo. Donec tincidunt leo tellus, id ornare ex egestas non. Ut dapibus
-        felis sed ipsum efficitur tempor. Nunc eget tellus dignissim massa
-        blandit tincidunt. Nulla facilisi. Quisque faucibus eu nisl sit amet
-        feugiat. Fusce vehicula dolor in commodo auctor. Pellentesque iaculis
-        tortor non hendrerit iaculis. Integer lacinia pretium sem, ut rutrum
-        velit pharetra eu.
-      </div>
-    </section>
   </app-todo>
-  <router-outlet />
 </div>
-} @else {
-<ng-container
-  *ngTemplateOutlet="
-    noTodo;
-    context: { $implicit: 'Micaela', lastName: 'Salvador' }
-  "
-></ng-container>
-}
+<br> <br> -->
+<!-- <div class="card-container">
+card-container
+</div> -->
+<router-outlet />
 
-<ng-template #noTodo let-name let-lastName="lastName">
-  <div>No hay elementos</div>
-  <div>nombre : {{ name }}</div>
-  <div>Apellido : {{ lastName }}</div>
-</ng-template>
 
-<!-- <button (click)="orderData()">Ordenar</button> -->
+
