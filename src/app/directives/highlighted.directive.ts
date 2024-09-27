@@ -1,4 +1,5 @@
-import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, Host, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Directive({
   selector: '[appHighlighted]',
@@ -6,7 +7,9 @@ import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } fro
 })
 export class HighlightedDirective {
 
-  constructor() {}
+  constructor(
+    // @Host()  private readonly apiService: ApiService
+  ) {}
 
   @Input() appHighlighted = false;
 

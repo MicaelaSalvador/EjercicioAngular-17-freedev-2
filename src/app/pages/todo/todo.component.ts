@@ -1,7 +1,10 @@
-import { Component, EventEmitter, Input, LOCALE_ID, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, LOCALE_ID, Output, SkipSelf } from '@angular/core';
 import { NTodo } from '../../models/todo.model';
 import { CommonModule , registerLocaleData} from '@angular/common';
 import es from'@angular/common/locales/es';
+//  import { ApiService } from '../../services/api.service';
+// import { API_TOKEN, apiServiceConfig } from '../../app.config';
+import { HttpClient } from '@angular/common/http';
 registerLocaleData(es);
 
 @Component({
@@ -11,12 +14,24 @@ registerLocaleData(es);
   providers:[
   {
     provide:LOCALE_ID, useValue:'es'
-  }
+  },
+  // ApiService,
+  // {
+  //   useValue:'http://localhost:8000',
+  //   provide: 'BASE_URL'
+  // }
   ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
 })
 export class TodoComponent {
+
+  constructor(
+  //  private readonly apiService: ApiService
+  ){
+    // console.log('TodoComponent',apiService.instanceId);
+   }
+
   @Input({ required: true}) todoData!: NTodo.TodoData;
 
   @Output() onClickIcon = new EventEmitter<NTodo.TodoData>();

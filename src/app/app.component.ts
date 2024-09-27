@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional, Self, SkipSelf } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodoComponent } from './pages/todo/todo.component';
 import { NTodo } from './models/todo.model';
@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './shared/header/header.component';
 import { FormsModule } from '@angular/forms';
 import { HighlightedDirective } from './directives/highlighted.directive';
-import { ApiService } from './services/api.service';
+ import { ApiService } from './services/api.service';
+
 
 
 @Component({
@@ -20,6 +21,13 @@ import { ApiService } from './services/api.service';
     FormsModule,
     HighlightedDirective
   ],
+  providers:[
+    // ApiService,
+    // {
+    //   useValue:'http://localhost:3000',
+    //   provide: 'BASE_URL'
+    // }
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -28,8 +36,13 @@ export class AppComponent implements OnInit {
   todos: NTodo.TodosResponse = {totalRecords: 0, data: []};
 
   constructor(
-    private readonly apiService: ApiService
-  ) {}
+  // @Self()  private readonly apiService: ApiService
+   //@SkipSelf()  private readonly apiService: ApiService
+  //  @Optional()  private readonly apiService: ApiService
+   private readonly apiService: ApiService
+  ) {
+    // console.log('AppComponent',apiService.instanceId);
+  }
 
   ngOnInit(): void {
     this.getTodos();
@@ -44,7 +57,10 @@ export class AppComponent implements OnInit {
   }
 
   updateTodo(item : NTodo.TodoData) {
+    // esto estaba  comentado
     // this.apiService.put(item, item.id).subscribe(console.log);
+
+    // esto no  estaba  comentado
     this.apiService.patch({ description: item.description}, item.id).subscribe(console.log);
   }
 
