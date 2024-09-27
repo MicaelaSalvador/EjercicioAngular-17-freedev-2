@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Self, SkipSelf } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Optional, Self, SkipSelf } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodoComponent } from './pages/todo/todo.component';
 import { NTodo } from './models/todo.model';
@@ -7,8 +7,6 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FormsModule } from '@angular/forms';
 import { HighlightedDirective } from './directives/highlighted.directive';
  import { ApiService } from './services/api.service';
-
-
 
 @Component({
   selector: 'app-root',
@@ -29,7 +27,8 @@ import { HighlightedDirective } from './directives/highlighted.directive';
     // }
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  changeDetection:ChangeDetectionStrategy.Default
 })
 export class AppComponent implements OnInit {
 
