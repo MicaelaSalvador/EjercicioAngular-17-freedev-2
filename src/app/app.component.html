@@ -1,13 +1,22 @@
-<app-header></app-header>
-<button (click)="addTodo()">Agregar todo</button>
+<!-- <app-header [counter]="(counter$ | async)??0"></app-header> -->
+<app-header [counter]="0"></app-header>
+<button (click)="addTodo()">{{'addTodo'| translate}}</button>
+
+<div style="margin: 2rem;">
+    <input type="text" [(ngModel)]="searchText">
+</div>
 <div class="todo-container">
-    @for (item of todos.data; track $index) {
+    <!-- @for (item of todos.data; track $index) { -->
+    @for (item of todos | filter:searchText; track $index) {
         <app-todo
-            [appHighlighted]="false"
             [todoData]="item"
+            sprint="10"
             (onClickIcon)="deleteTodo($event)"
         >
-        <textarea rows="10" [(ngModel)]="item.description" (blur)="updateTodo(item)"></textarea>
+        <!-- <textarea rows="10" [(ngModel)]="item.description" (blur)="updateTodo(item)"></textarea> -->
+        <textarea rows="10" (blur)="updateTodo($event , item)">{{item.description}}</textarea>
         </app-todo>
     }
 </div>
+
+<!-- [appHighlighted]="false" -->
